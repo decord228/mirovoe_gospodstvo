@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Мировое Господство - Драконорождённые</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="app">
+        <!-- Header -->
+        <header class="header">
+            <h1>🐉 Мировое Господство</h1>
+            <div class="race-info">
+                <span>Драконорождённые</span>
+                <span style="margin-left: 2rem; color: var(--warning);">⏳ Текущий ход: <strong id="header-current-turn">2</strong></span>
+            </div>
+        </header>
+
+        <!-- Main Layout -->
+        <div class="main-layout">
+            <!-- Sidebar Navigation -->
+            <aside class="sidebar">
+                <nav class="nav">
+                    <button class="nav-btn active" data-view="dashboard">📊 Состояние</button>
+                    <button class="nav-btn" data-view="turns">📅 Ходы</button>
+                    <button class="nav-btn" data-view="diplomacy">🤝 Дипломатия</button>
+                    <button class="nav-btn" data-view="reference">📚 Справка</button>
+                </nav>
+
+                <!-- Quick Stats -->
+                <div class="quick-stats">
+                    <h3>Ресурсы</h3>
+                    <div class="resource-item">
+                        <span>🌾 Еда:</span>
+                        <span id="quick-food">0</span>
+                    </div>
+                    <div class="resource-item">
+                        <span>🪵 Дерево:</span>
+                        <span id="quick-wood">0</span>
+                    </div>
+                    <div class="resource-item">
+                        <span>🪨 Камень:</span>
+                        <span id="quick-stone">0</span>
+                    </div>
+                    <div class="resource-item">
+                        <span>⚙️ Металл:</span>
+                        <span id="quick-metal">0</span>
+                    </div>
+                    <div class="resource-item">
+                        <span>⚔️ Сила:</span>
+                        <span id="quick-power">0</span>
+                    </div>
+                    <div class="resource-item">
+                        <span>🎯 ОМ:</span>
+                        <span id="quick-om">0</span>
+                    </div>
+                </div>
+            </aside>
+
+            <!-- Main Content -->
+            <main class="content">
+                <!-- Dashboard View -->
+                <div id="dashboard-view" class="view active">
+                    <h2>Текущее Состояние</h2>
+
+                    <div class="cards-grid">
+                        <!-- Resources Card -->
+                        <div class="card">
+                            <h3>💰 Ресурсы</h3>
+                            <div id="resources-content"></div>
+                        </div>
+
+                        <!-- Army Card -->
+                        <div class="card">
+                            <h3>⚔️ Армия</h3>
+                            <div id="army-content"></div>
+                        </div>
+
+                        <!-- Buildings Card -->
+                        <div class="card">
+                            <h3>🏠 Здания</h3>
+                            <div id="buildings-content"></div>
+                        </div>
+
+                        <!-- Hero & OM Card -->
+                        <div class="card">
+                            <h3>🎖️ Герой и ОМ</h3>
+                            <div id="hero-content"></div>
+                        </div>
+                    </div>
+
+                    <!-- Building Planner -->
+                    <div style="margin-top: 2rem;">
+                        <h2>🏗️ Планировщик построек</h2>
+                        <div class="cards-grid">
+                            <!-- Currently Building -->
+                            <div class="card">
+                                <h3>⏳ Строится/Улучшается</h3>
+                                <div id="building-now-content"></div>
+                            </div>
+
+                            <!-- Completed Buildings -->
+                            <div class="card">
+                                <h3>✅ Готово (можно улучшить)</h3>
+                                <div id="building-completed-content"></div>
+                            </div>
+
+                            <!-- New Buildings Available -->
+                            <div class="card">
+                                <h3>🆕 Новые постройки</h3>
+                                <div id="building-new-content"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Turns View -->
+                <div id="turns-view" class="view">
+                    <h2>Ходы</h2>
+
+                    <!-- Список всех ходов -->
+                    <div id="turns-list" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 1rem; margin-bottom: 2rem;"></div>
+
+                    <div class="turns-navigation">
+                        <button id="prev-turn" class="turn-nav-btn">← Предыдущий</button>
+                        <span id="current-turn-label">Ход 1</span>
+                        <button id="next-turn" class="turn-nav-btn">Следующий →</button>
+                    </div>
+                    <div id="turn-content" class="turn-detail"></div>
+                </div>
+
+                <!-- Diplomacy View -->
+                <div id="diplomacy-view" class="view">
+                    <h2>🤝 Дипломатия</h2>
+                    <div id="diplomacy-content"></div>
+                </div>
+
+                <!-- Reference View -->
+                <div id="reference-view" class="view">
+                    <h2>📚 Справочники</h2>
+                    <div class="tabs">
+                        <button class="tab-btn active" data-tab="buildings">Здания</button>
+                        <button class="tab-btn" data-tab="units">Юниты</button>
+                        <button class="tab-btn" data-tab="rules">Правила</button>
+                    </div>
+                    <div id="reference-content"></div>
+                </div>
+            </main>
+        </div>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <div class="sync-status">
+                <span id="sync-indicator">●</span>
+                <span id="sync-text">Синхронизировано</span>
+            </div>
+            <button id="reload-data-btn" class="btn-primary" style="background: var(--success);">🔄 Загрузить из data.json</button>
+            <button id="clear-cache-btn" class="btn-primary" style="background: var(--warning);">🗑️ Очистить кеш</button>
+            <button id="save-btn" class="btn-success">💾 Сохранить</button>
+        </footer>
+    </div>
+
+    <script src="parser.js"></script>
+    <script src="sync.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
