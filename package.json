@@ -1,0 +1,12 @@
+{
+  "name": "mirovoe-gospodstvo",
+  "version": "1.0.0",
+  "description": "Веб-интерфейс для игры Мировое Господство",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}
